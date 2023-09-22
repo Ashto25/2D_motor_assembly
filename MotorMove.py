@@ -86,8 +86,8 @@ def moveto(x, y):
 
     time_run_sec = c / sps
 
-    time_between_x = time_run_sec / (x * int(Selected))
-    time_between_y = time_run_sec / (y * int(Selected))
+    time_between_x = time_run_sec / (abs(x) * int(Selected))
+    time_between_y = time_run_sec / (abs(y) * int(Selected))
 
     current_pos_x = 0
     current_pos_y = 0
