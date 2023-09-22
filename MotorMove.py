@@ -92,8 +92,8 @@ def moveto(x, y):
     current_pos_x = 0
     current_pos_y = 0
 
-    x_offset = x - current_pos_x
-    y_offset = y - current_pos_y
+    x_offset = x*int(Selected) - current_pos_x
+    y_offset = y*int(Selected) - current_pos_y
 
     x_progress = 0
     y_progress = 0
