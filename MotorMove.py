@@ -1,5 +1,6 @@
 from time import sleep
 import RPi.GPIO as GPIO
+import math
 
 DIR = 20
 STEP = 21
@@ -43,7 +44,7 @@ delay = 1 / step_count / 5
 for r in range(1):
     GPIO.output(DIR, CW)
     GPIO.output(DIR2, CW)
-    for x in range(step_count*4):
+    for x in range(step_count*1):
         GPIO.output(STEP, GPIO.HIGH)
         GPIO.output(STEP2, GPIO.HIGH)
         sleep(delay)
@@ -62,4 +63,46 @@ for r in range(1):
         sleep(delay)
     sleep(1)
 
+current_pos_x = 0
+current_pos_y = 0
     
+def moveto(x, y):
+    x_offset = x - current_pos_x
+    y_offset = y - current_pos_y
+
+    x_progress = 0
+    y_progress = 0
+
+    #Calculate slope of movement
+    slope = math.floor(y/x)
+
+    #Update motor movement direction
+    if x_offset > 0:
+        GPIO.output(DIR, CW)
+    else:
+        GPIO.output(DIR, CCW)
+    
+    if y_offset > 0:
+        GPIO.output(DIR2, CW)
+    else:
+        GPIO.output(DIR2, CCW)
+
+
+
+    while x_progress < math.abs(x_offset):
+        GPIO.output(STEP, GPIO.HIGH)
+        current_pos_x += (1 / int(Selected))
+        if y_progress < math.abs(y_offset):
+            y_progress += (1 / int(Selected))
+            current_pos_y += (1 / int(Selected))
+            GPIO.output(STEP2, GPIO.HIGH)
+        sleep(delay)
+        GPIO.output(STEP, GPIO.LOW)
+        GPIO.output(STEP2, GPIO.LOW)
+    
+    while y_progress < math.abs(y_offset):
+        y_progress += (1 / int(Selected))
+        GPIO.output(STEP2, GPIO.HIGH)
+        current_pos_y += (1 / int(Selected))
+        sleep(delay)
+        GPIO.output(STEP2, GPIO.LOW)
