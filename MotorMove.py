@@ -67,6 +67,9 @@ current_pos_x = 0
 current_pos_y = 0
     
 def moveto(x, y):
+    current_pos_x = 0
+    current_pos_y = 0
+
     x_offset = x - current_pos_x
     y_offset = y - current_pos_y
 
