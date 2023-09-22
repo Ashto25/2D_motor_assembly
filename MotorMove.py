@@ -66,7 +66,7 @@ delay = 1 / step_count / 5
 current_pos_x = 0
 current_pos_y = 0
     
-def moveto(x, y):
+def moveto(x, y, current_pos_x, current_pos_y):
     x_offset = x - current_pos_x
     y_offset = y - current_pos_y
 
@@ -108,4 +108,4 @@ def moveto(x, y):
         GPIO.output(STEP2, GPIO.LOW)
 
 
-moveto(30,60)
+moveto(30,60, current_pos_x, current_pos_y)
