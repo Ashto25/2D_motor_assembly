@@ -106,3 +106,6 @@ def moveto(x, y):
         current_pos_y += (1 / int(Selected))
         sleep(delay)
         GPIO.output(STEP2, GPIO.LOW)
+
+
+moveto(30,60)
