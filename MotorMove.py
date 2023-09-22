@@ -147,4 +147,4 @@ def moveto(x, y):
     #     GPIO.output(STEP2, GPIO.LOW)
 
 
-moveto(10,10)
+moveto(100,100)
