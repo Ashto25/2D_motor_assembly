@@ -89,7 +89,7 @@ def moveto(x, y, current_pos_x, current_pos_y):
 
 
 
-    while x_progress < math.abs(x_offset):
+    while x_progress < abs(x_offset):
         GPIO.output(STEP, GPIO.HIGH)
         current_pos_x += (1 / int(Selected))
         if y_progress < math.abs(y_offset):
@@ -100,7 +100,7 @@ def moveto(x, y, current_pos_x, current_pos_y):
         GPIO.output(STEP, GPIO.LOW)
         GPIO.output(STEP2, GPIO.LOW)
     
-    while y_progress < math.abs(y_offset):
+    while y_progress < abs(y_offset):
         y_progress += (1 / int(Selected))
         GPIO.output(STEP2, GPIO.HIGH)
         current_pos_y += (1 / int(Selected))
