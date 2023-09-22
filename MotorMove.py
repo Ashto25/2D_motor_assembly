@@ -113,8 +113,8 @@ def moveto(x, y):
         GPIO.output(DIR2, CW)
 
 
-    threadX = threading.Thread(move_x, args=(abs(x_offset), time_between_x))
-    threadY = threading.Thread(move_y, args=(abs(y_offset), time_between_y))
+    threadX = threading.Thread(target=move_x, args=(abs(x_offset), time_between_x))
+    threadY = threading.Thread(target=move_y, args=(abs(y_offset), time_between_y))
 
     threadX.start()
     threadY.start()
