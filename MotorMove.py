@@ -41,27 +41,27 @@ delay = 1 / step_count / 5
 
 
 #Move in test motion back and forth
-for r in range(1):
-    GPIO.output(DIR, CW)
-    GPIO.output(DIR2, CW)
-    for x in range(step_count*1):
-        GPIO.output(STEP, GPIO.HIGH)
-        GPIO.output(STEP2, GPIO.HIGH)
-        sleep(delay)
-        GPIO.output(STEP, GPIO.LOW)
-        GPIO.output(STEP2, GPIO.LOW)
-        sleep(delay)
-    GPIO.output(DIR, CCW)
-    GPIO.output(DIR2, CCW)
-    sleep(1)
-    for x in range(step_count*4):
-        GPIO.output(STEP, GPIO.HIGH)
-        GPIO.output(STEP2, GPIO.HIGH)
-        sleep(delay)
-        GPIO.output(STEP, GPIO.LOW)
-        GPIO.output(STEP2, GPIO.LOW)
-        sleep(delay)
-    sleep(1)
+# for r in range(1):
+#     GPIO.output(DIR, CW)
+#     GPIO.output(DIR2, CW)
+#     for x in range(step_count*1):
+#         GPIO.output(STEP, GPIO.HIGH)
+#         GPIO.output(STEP2, GPIO.HIGH)
+#         sleep(delay)
+#         GPIO.output(STEP, GPIO.LOW)
+#         GPIO.output(STEP2, GPIO.LOW)
+#         sleep(delay)
+#     GPIO.output(DIR, CCW)
+#     GPIO.output(DIR2, CCW)
+#     sleep(1)
+#     for x in range(step_count*4):
+#         GPIO.output(STEP, GPIO.HIGH)
+#         GPIO.output(STEP2, GPIO.HIGH)
+#         sleep(delay)
+#         GPIO.output(STEP, GPIO.LOW)
+#         GPIO.output(STEP2, GPIO.LOW)
+#         sleep(delay)
+#     sleep(1)
 
 current_pos_x = 0
 current_pos_y = 0
