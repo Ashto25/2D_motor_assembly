@@ -86,9 +86,9 @@ def moveto(x, y):
         GPIO.output(DIR, CCW)
     
     if y_offset > 0:
-        GPIO.output(DIR2, CW)
-    else:
         GPIO.output(DIR2, CCW)
+    else:
+        GPIO.output(DIR2, CW)
 
 
 
