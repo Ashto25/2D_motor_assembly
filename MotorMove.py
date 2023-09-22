@@ -148,3 +148,4 @@ def moveto(x, y):
 
 
 moveto(100,100)
+moveto(-100,-100)
