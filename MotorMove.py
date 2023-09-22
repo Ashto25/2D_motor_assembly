@@ -1,6 +1,7 @@
 from time import sleep
 import RPi.GPIO as GPIO
 import math
+import threading
 
 DIR = 20
 STEP = 21
@@ -65,8 +66,29 @@ delay = 1 / step_count / 5
 
 current_pos_x = 0
 current_pos_y = 0
-    
+
+def move_x(steps, time_between):
+    for i in range(steps):
+        GPIO.output(STEP, GPIO.HIGH)
+        sleep(time_between)
+        GPIO.output(STEP, GPIO.LOW)
+
+def move_y(steps, time_between):
+    for i in range(steps):
+        GPIO.output(STEP2, GPIO.HIGH)
+        sleep(time_between)
+        GPIO.output(STEP2, GPIO.LOW)
+
 def moveto(x, y):
+
+    sps = 3 * int(Selected)
+    c = math.sqrt(x**2 + y**2)
+
+    time_run_sec = c / sps
+
+    time_between_x = time_run_sec / (x * int(Selected))
+    time_between_y = time_run_sec / (y * int(Selected))
+
     current_pos_x = 0
     current_pos_y = 0
 
@@ -91,25 +113,38 @@ def moveto(x, y):
         GPIO.output(DIR2, CW)
 
 
+    threadX = threading.Thread(move_x, args=(abs(x_offset), time_between_x))
+    threadY = threading.Thread(move_y, args=(abs(y_offset), time_between_y))
 
-    while x_progress < abs(x_offset):
-        GPIO.output(STEP, GPIO.HIGH)
-        current_pos_x += (1 / int(Selected))
-        x_progress += (1 / int(Selected))
-        if y_progress < abs(y_offset):
-            y_progress += (1 / int(Selected))
-            current_pos_y += (1 / int(Selected))
-            GPIO.output(STEP2, GPIO.HIGH)
-        sleep(delay)
-        GPIO.output(STEP, GPIO.LOW)
-        GPIO.output(STEP2, GPIO.LOW)
+    threadX.start()
+    threadY.start()
+
+    sleep(time_run_sec)
+
+    print("Done moving")
+    # while x_progress < abs(x_offset) or y_progress < abs(y_offset):
+
+
+        
+
+
+    #     GPIO.output(STEP, GPIO.HIGH)
+    #     current_pos_x += (1 / int(Selected))
+    #     x_progress += (1 / int(Selected))
+    #     if y_progress < abs(y_offset):
+    #         y_progress += (1 / int(Selected))
+    #         current_pos_y += (1 / int(Selected))
+    #         GPIO.output(STEP2, GPIO.HIGH)
+    #     sleep(delay)
+    #     GPIO.output(STEP, GPIO.LOW)
+    #     GPIO.output(STEP2, GPIO.LOW)
     
-    while y_progress < abs(y_offset):
-        y_progress += (1 / int(Selected))
-        GPIO.output(STEP2, GPIO.HIGH)
-        current_pos_y += (1 / int(Selected))
-        sleep(delay)
-        GPIO.output(STEP2, GPIO.LOW)
+    # while y_progress < abs(y_offset):
+    #     y_progress += (1 / int(Selected))
+    #     GPIO.output(STEP2, GPIO.HIGH)
+    #     current_pos_y += (1 / int(Selected))
+    #     sleep(delay)
+    #     GPIO.output(STEP2, GPIO.LOW)
 
 
-moveto(30,60)
+moveto(10,10)
