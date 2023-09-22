@@ -66,7 +66,7 @@ delay = 1 / step_count / 5
 current_pos_x = 0
 current_pos_y = 0
     
-def moveto(x, y, current_pos_x, current_pos_y):
+def moveto(x, y):
     x_offset = x - current_pos_x
     y_offset = y - current_pos_y
 
@@ -92,6 +92,7 @@ def moveto(x, y, current_pos_x, current_pos_y):
     while x_progress < abs(x_offset):
         GPIO.output(STEP, GPIO.HIGH)
         current_pos_x += (1 / int(Selected))
+        x_progress += (1 / int(Selected))
         if y_progress < abs(y_offset):
             y_progress += (1 / int(Selected))
             current_pos_y += (1 / int(Selected))
@@ -108,4 +109,4 @@ def moveto(x, y, current_pos_x, current_pos_y):
         GPIO.output(STEP2, GPIO.LOW)
 
 
-moveto(30,60, current_pos_x, current_pos_y)
+moveto(30,60)
