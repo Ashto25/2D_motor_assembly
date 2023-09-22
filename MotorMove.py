@@ -81,7 +81,7 @@ def move_y(steps, time_between):
 
 def moveto(x, y):
 
-    sps = 3 * int(Selected)
+    sps = 10 * int(Selected)
     c = math.sqrt(x**2 + y**2)
 
     time_run_sec = c / sps
@@ -119,8 +119,10 @@ def moveto(x, y):
     threadX.start()
     threadY.start()
 
-    sleep(time_run_sec)
-
+    threadX.join()
+    threadY.join()
+    #sleep(time_run_sec)
+    sleep(1)
     print("Done moving")
     # while x_progress < abs(x_offset) or y_progress < abs(y_offset):
 
