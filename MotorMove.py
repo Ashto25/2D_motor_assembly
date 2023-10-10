@@ -86,7 +86,7 @@ def move_x(steps, time_between):
     else:
         GPIO.output(DIR, CCW)
     
-    
+    steps = int(steps)
     global actual_x
     for i in range(abs(steps)):
         GPIO.output(STEP, GPIO.HIGH)
@@ -108,7 +108,7 @@ def move_y(steps, time_between):
     else:
         GPIO.output(DIR2, CW)
 
-
+    steps = int(steps)
     global actual_y
     for i in range(abs(steps)):
         GPIO.output(STEP2, GPIO.HIGH)
