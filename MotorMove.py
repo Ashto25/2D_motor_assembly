@@ -167,7 +167,7 @@ def move_circle(radius):
         current_pos_x = x_offset
         current_pos_y = y_offset
         
-        print(x_offset, y_offset
+        print(x_offset, y_offset)
 
         threadX = threading.Thread(target=move_x, args=(abs(x_offset), time_between))
         threadY = threading.Thread(target=move_y, args=(abs(y_offset), time_between))
