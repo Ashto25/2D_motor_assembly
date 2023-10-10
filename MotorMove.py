@@ -88,6 +88,9 @@ def move_y(steps, time_between):
 
 def moveto(x, y):
 
+    global actual_x
+    global actual_y
+
     print(f"Moving from ({actual_x}, {actual_y}) to ({x}, {y})")
 
     sps = motor_speed #* int(Selected)
@@ -141,9 +144,8 @@ def new_circle(radius):
     angle_increment = (2 * math.pi)/ N
 
     #Temporary (relative movement only for now)
-    actual_x = 0
-    actual_y = 0
-
+    global actual_x
+    global actual_y
 
     x_center = actual_x
     y_center = actual_y
