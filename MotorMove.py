@@ -262,10 +262,10 @@ moveto(0, 100)
 
 new_circle(40) # (40, 100)
 
-moveto(70, 110)  
-moveto(80, 80) 
-moveto(80, -20) 
-moveto(70, -30) 
+moveto(90, 140)  
+moveto(110, 80) 
+moveto(110, -20) 
+moveto(90, -60) 
 
 #sleep(5)
 #new_circle(100)
