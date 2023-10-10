@@ -66,9 +66,9 @@ delay = 1 / step_count / 5
 
 motor_speed = 50
 
+actual_x = 0
+actual_y = 0
 
-current_pos_x = 0
-current_pos_y = 0
 
 def move_x(steps, time_between):
     steps = int(steps)
@@ -76,6 +76,7 @@ def move_x(steps, time_between):
         GPIO.output(STEP, GPIO.HIGH)
         sleep(time_between)
         GPIO.output(STEP, GPIO.LOW)
+        actual_x += 1/int(Selected)
 
 def move_y(steps, time_between):
     steps = int(steps)
@@ -83,29 +84,26 @@ def move_y(steps, time_between):
         GPIO.output(STEP2, GPIO.HIGH)
         sleep(time_between)
         GPIO.output(STEP2, GPIO.LOW)
+        actual_y += 1/int(Selected)
 
 def moveto(x, y):
 
+    print("Moving from ({actual_x}, {actual_y}) to ({x}, {y})")
 
     sps = motor_speed #* int(Selected)
-    c = math.sqrt(x**2 + y**2)
+    c = math.sqrt((actual_x-x)**2 + (actual_y-y)**2)
 
     time_run_sec = c / motor_speed #sps
 
-    time_between_x = time_run_sec / (abs(x) * int(Selected))
-    time_between_y = time_run_sec / (abs(y) * int(Selected))
+    time_between_x = time_run_sec / (abs(x - actual_x) * int(Selected))
+    time_between_y = time_run_sec / (abs(y - actual_y) * int(Selected))
 
-    current_pos_x = 0
-    current_pos_y = 0
 
-    x_offset = x*int(Selected) - current_pos_x
-    y_offset = y*int(Selected) - current_pos_y
-
-    x_progress = 0
-    y_progress = 0
+    x_offset = (x - actual_x) * int(Selected)
+    y_offset = (y - actual_y) *int(Selected)
 
     #Calculate slope of movement
-    slope = math.floor(y/x)
+    #slope = math.floor(y/x)
 
     #Update motor movement direction
     if x_offset > 0:
@@ -129,7 +127,7 @@ def moveto(x, y):
     threadY.join()
     #sleep(time_run_sec)
     #sleep(1)
-    print("Done moving")
+    print("Done moving, new pos is ({actual_x}, {actual_y})")
     # while x_progress < abs(x_offset) or y_progress < abs(y_offset):
 
 
@@ -138,7 +136,26 @@ def moveto(x, y):
 #def circle_x():
 
 
-    
+def new_circle(radius):
+    N = 100 # num of steps for complete revolution
+    angle_increment = (2 * math.pi)/ N
+
+    #Temporary (relative movement only for now)
+    actual_x = 0
+    actual_y = 0
+
+
+    x_center = actual_x
+    y_center = actual_y
+
+    for i in range(N):
+        angle = i * angle_increment
+
+        x_pos = x_center + radius * math.cos(angle)
+        y_pos = y_center + radius * math.sin(angle)
+
+        moveto(x_pos, y_pos)
+
 
 
 
@@ -210,6 +227,6 @@ def move_circle(radius):
     #     GPIO.output(STEP2, GPIO.LOW)
 
 
-moveto(100,100)
-move_circle(5)
-moveto(-100,-100)
+moveto(200,200)
+new_circle(20)
+moveto(-200,-200)
