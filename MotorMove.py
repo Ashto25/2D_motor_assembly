@@ -166,7 +166,7 @@ def moveto(x, y):
 
 
 def new_circle(radius):
-    N = 300 # num of steps for complete revolution
+    N = 600 # num of steps for complete revolution
     angle_increment = (2 * math.pi)/ N
 
     #Temporary (relative movement only for now)
@@ -176,7 +176,7 @@ def new_circle(radius):
     x_center = actual_x
     y_center = actual_y
 
-    for i in range(N):
+    for i in range(N+1):
         angle = i * angle_increment
 
         x_pos = x_center + radius * math.cos(angle) 
