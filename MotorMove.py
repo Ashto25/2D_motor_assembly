@@ -64,6 +64,9 @@ delay = 1 / step_count / 5
 #         sleep(delay)
 #     sleep(1)
 
+motor_speed = 10
+
+
 current_pos_x = 0
 current_pos_y = 0
 
@@ -81,10 +84,11 @@ def move_y(steps, time_between):
 
 def moveto(x, y):
 
-    sps = 10 * int(Selected)
+
+    sps = motor_speed #* int(Selected)
     c = math.sqrt(x**2 + y**2)
 
-    time_run_sec = c / sps
+    time_run_sec = c / motor_speed #sps
 
     time_between_x = time_run_sec / (abs(x) * int(Selected))
     time_between_y = time_run_sec / (abs(y) * int(Selected))
@@ -127,7 +131,46 @@ def moveto(x, y):
     # while x_progress < abs(x_offset) or y_progress < abs(y_offset):
 
 
+
+
+#def circle_x():
+
+
+    
+
+
+
+#Current position is the bottom ( radian 3pi/2 [0,-1] coordinate) of the circle
+def move_circle(radius):
+
+    #sps = motor_speed * int(Selected)
+    circumference = 2 * math.pi * radius #2pir
+    time_run_sec = circumference / motor_speed # Calculate distance / speed ( = distance / (distance/time) = time * (distance/distance) = time)
+
+    time_between = time_run_sec / (int(Selected) * 4 * radius)
+
+    current_degree = -180
+    current_pos_x = 0 # Starts at circle bottom (x middle)
+    current_pos_y = -radius # Starts at circle bottom
+
+    #radius_sqrd = radius*radius
+
+    for d in range(360 * int(Selected)):
+        #rcosx()
+        radians = math.radians(current_degree + (d/int(Selected))) # Calculate next angle to go to
+
+        x_offset = (radius * math.cos(radians))*int(Selected) - current_pos_x
+        y_offset = (radius * math.sin(radians))*int(Selected) - current_pos_y
         
+        threadX = threading.Thread(target=move_x, args=(abs(x_offset), time_between))
+        threadY = threading.Thread(target=move_y, args=(abs(y_offset), time_between))
+
+
+        threadX.start()
+        threadY.start()
+        threadX.join()
+        threadY.join()
+        sleep(0.1)
 
 
     #     GPIO.output(STEP, GPIO.HIGH)
@@ -150,4 +193,5 @@ def moveto(x, y):
 
 
 moveto(100,100)
+move_circle(50)
 moveto(-100,-100)
