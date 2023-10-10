@@ -64,7 +64,7 @@ delay = 1 / step_count / 5
 #         sleep(delay)
 #     sleep(1)
 
-motor_speed = 10
+motor_speed = 50
 
 
 current_pos_x = 0
@@ -170,7 +170,7 @@ def move_circle(radius):
         threadY.start()
         threadX.join()
         threadY.join()
-        sleep(0.1)
+        sleep(1)
 
 
     #     GPIO.output(STEP, GPIO.HIGH)
