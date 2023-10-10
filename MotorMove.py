@@ -66,11 +66,16 @@ delay = 1 / step_count / 5
 
 motor_speed = 50
 
+
+global actual_x
+global actual_y
+
 actual_x = 0
 actual_y = 0
 
 
 def move_x(steps, time_between):
+    global actual_x
     steps = int(steps)
     for i in range(steps):
         GPIO.output(STEP, GPIO.HIGH)
@@ -79,6 +84,7 @@ def move_x(steps, time_between):
         actual_x += 1/int(Selected)
 
 def move_y(steps, time_between):
+    global actual_y
     steps = int(steps)
     for i in range(steps):
         GPIO.output(STEP2, GPIO.HIGH)
