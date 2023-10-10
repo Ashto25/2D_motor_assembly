@@ -71,12 +71,14 @@ current_pos_x = 0
 current_pos_y = 0
 
 def move_x(steps, time_between):
+    steps = int(steps)
     for i in range(steps):
         GPIO.output(STEP, GPIO.HIGH)
         sleep(time_between)
         GPIO.output(STEP, GPIO.LOW)
 
 def move_y(steps, time_between):
+    steps = int(steps)
     for i in range(steps):
         GPIO.output(STEP2, GPIO.HIGH)
         sleep(time_between)
