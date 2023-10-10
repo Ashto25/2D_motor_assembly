@@ -126,13 +126,18 @@ def moveto(x, y):
 
     print(f"Moving from ({actual_x}, {actual_y}) to ({x}, {y})")
 
-    sps = motor_speed #* int(Selected)
-    c = math.sqrt((actual_x-x)**2 + (actual_y-y)**2)
+    x_converted = x * int(Selected)
+    y_converted = y * int(Selected)
 
-    time_run_sec = c / motor_speed #sps
+    actual_x_converted = actual_x * int(Selected)
+    actual_y_converted = actual_y * int(Selected)
 
-    x_offset = (x - actual_x) * int(Selected)
-    y_offset = (y - actual_y) *int(Selected)
+    c = math.sqrt((actual_x_converted-x_converted)**2 + (actual_y_converted-y_converted)**2)
+
+    time_run_sec = c / (motor_speed * int(Selected)) #sps
+
+    x_offset = (x_converted - actual_x_converted)
+    y_offset = (y_converted - actual_y_converted)
 
     time_between_x = 0
     time_between_y = 0
@@ -171,7 +176,7 @@ def new_circle(radius):
     x_center = actual_x
     y_center = actual_y
 
-    for i in range(N+1):
+    for i in range(N):
         angle = i * angle_increment
 
         x_pos = x_center + radius * math.cos(angle) 
@@ -179,7 +184,7 @@ def new_circle(radius):
 
         moveto(x_pos, y_pos)
 
-
+    moveto(x_center + radius, y_center)
 
 
 #Current position is the bottom ( radian 3pi/2 [0,-1] coordinate) of the circle
