@@ -155,7 +155,7 @@ def move_circle(radius):
 
     #radius_sqrd = radius*radius
 
-    for d in range(360 * int(Selected)):
+    for d in range(int(360 * int(Selected))):
         #rcosx()
         radians = math.radians(current_degree + (d/int(Selected))) # Calculate next angle to go to
 
