@@ -75,6 +75,15 @@ actual_y = 0
 
 
 def move_x(steps, time_between):
+
+
+    #Update motor movement direction
+    if steps > 0:
+        GPIO.output(DIR, CW)
+    else:
+        GPIO.output(DIR, CCW)
+    
+    
     global actual_x
     steps = int(steps)
     for i in range(steps):
@@ -84,6 +93,14 @@ def move_x(steps, time_between):
         actual_x += 1/int(Selected)
 
 def move_y(steps, time_between):
+
+    #Update motor movement direction
+    if steps > 0:
+        GPIO.output(DIR2, CCW)
+    else:
+        GPIO.output(DIR2, CW)
+
+
     global actual_y
     steps = int(steps)
     for i in range(steps):
@@ -104,30 +121,15 @@ def moveto(x, y):
 
     time_run_sec = c / motor_speed #sps
 
-    time_between_x = time_run_sec / (abs(x - actual_x) * int(Selected))
-    time_between_y = time_run_sec / (abs(y - actual_y) * int(Selected))
-
-
     x_offset = (x - actual_x) * int(Selected)
     y_offset = (y - actual_y) *int(Selected)
 
-    #Calculate slope of movement
-    #slope = math.floor(y/x)
-
-    #Update motor movement direction
-    if x_offset > 0:
-        GPIO.output(DIR, CW)
-    else:
-        GPIO.output(DIR, CCW)
-    
-    if y_offset > 0:
-        GPIO.output(DIR2, CCW)
-    else:
-        GPIO.output(DIR2, CW)
-
-
-    threadX = threading.Thread(target=move_x, args=(abs(x_offset), time_between_x))
-    threadY = threading.Thread(target=move_y, args=(abs(y_offset), time_between_y))
+    if x_offset != 0:
+        time_between_x = time_run_sec / (abs(x_offset))
+        threadX = threading.Thread(target=move_x, args=(x_offset, time_between_x))
+    if y_offset != 0:
+        time_between_y = time_run_sec / (abs(y_offset))
+        threadY = threading.Thread(target=move_y, args=(y_offset, time_between_y))
 
     threadX.start()
     threadY.start()
@@ -159,7 +161,7 @@ def new_circle(radius):
     for i in range(N):
         angle = i * angle_increment
 
-        x_pos = x_center + radius * math.cos(angle)
+        x_pos = x_center + radius * math.cos(angle) 
         y_pos = y_center + radius * math.sin(angle)
 
         moveto(x_pos, y_pos)
@@ -236,5 +238,5 @@ def move_circle(radius):
 
 
 moveto(200,200)
-new_circle(20)
+new_circle(5)
 moveto(-200,-200)
