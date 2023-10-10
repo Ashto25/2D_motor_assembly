@@ -64,7 +64,7 @@ delay = 1 / step_count / 5
 #         sleep(delay)
 #     sleep(1)
 
-motor_speed = 50
+motor_speed = 25
 
 
 global actual_x
@@ -161,7 +161,7 @@ def moveto(x, y):
 
 
 def new_circle(radius):
-    N = 100 # num of steps for complete revolution
+    N = 300 # num of steps for complete revolution
     angle_increment = (2 * math.pi)/ N
 
     #Temporary (relative movement only for now)
@@ -253,5 +253,5 @@ def move_circle(radius):
 #moveto(100,100)
 new_circle(40)
 sleep(5)
-new_circle(70)
+new_circle(100)
 #moveto(-100,-100)
