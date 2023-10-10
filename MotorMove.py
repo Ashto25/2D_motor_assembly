@@ -88,12 +88,14 @@ def move_x(steps, time_between):
     
     
     global actual_x
-    steps = int(steps)
-    for i in range(steps):
+    for i in range(abs(steps)):
         GPIO.output(STEP, GPIO.HIGH)
         sleep(time_between)
         GPIO.output(STEP, GPIO.LOW)
-        actual_x += 1/int(Selected)
+        if steps > 0:
+            actual_x += 1/int(Selected)
+        else:
+            actual_x -= 1/int(Selected)
 
 def move_y(steps, time_between):
 
@@ -108,12 +110,14 @@ def move_y(steps, time_between):
 
 
     global actual_y
-    steps = int(steps)
-    for i in range(steps):
+    for i in range(abs(steps)):
         GPIO.output(STEP2, GPIO.HIGH)
         sleep(time_between)
         GPIO.output(STEP2, GPIO.LOW)
-        actual_y += 1/int(Selected)
+        if steps > 0:
+            actual_y += 1/int(Selected)
+        else:
+            actual_y -= 1/int(Selected)
 
 def moveto(x, y):
 
@@ -246,6 +250,8 @@ def move_circle(radius):
     #     GPIO.output(STEP2, GPIO.LOW)
 
 
-moveto(100,100)
+#moveto(100,100)
 new_circle(40)
-moveto(-100,-100)
+sleep(5)
+new_circle(70)
+#moveto(-100,-100)
