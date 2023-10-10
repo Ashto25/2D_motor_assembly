@@ -151,7 +151,7 @@ def move_circle(radius):
 
     time_between = time_run_sec / (int(Selected) * 4 * radius)
 
-    current_degree = -180
+    current_degree = -90
     current_pos_x = 0 # Starts at circle bottom (x middle)
     current_pos_y = -radius # Starts at circle bottom
 
