@@ -76,6 +76,9 @@ actual_y = 0
 
 def move_x(steps, time_between):
 
+    if steps == 0:
+        return
+
 
     #Update motor movement direction
     if steps > 0:
@@ -93,6 +96,9 @@ def move_x(steps, time_between):
         actual_x += 1/int(Selected)
 
 def move_y(steps, time_between):
+
+    if steps == 0:
+        return
 
     #Update motor movement direction
     if steps > 0:
@@ -124,12 +130,15 @@ def moveto(x, y):
     x_offset = (x - actual_x) * int(Selected)
     y_offset = (y - actual_y) *int(Selected)
 
+    time_between_x = 0
+    time_between_y = 0
+
     if x_offset != 0:
         time_between_x = time_run_sec / (abs(x_offset))
-        threadX = threading.Thread(target=move_x, args=(x_offset, time_between_x))
+    threadX = threading.Thread(target=move_x, args=(x_offset, time_between_x))
     if y_offset != 0:
         time_between_y = time_run_sec / (abs(y_offset))
-        threadY = threading.Thread(target=move_y, args=(y_offset, time_between_y))
+    threadY = threading.Thread(target=move_y, args=(y_offset, time_between_y))
 
     threadX.start()
     threadY.start()
@@ -237,6 +246,6 @@ def move_circle(radius):
     #     GPIO.output(STEP2, GPIO.LOW)
 
 
-moveto(200,200)
-new_circle(5)
-moveto(-200,-200)
+moveto(100,100)
+new_circle(40)
+moveto(-100,-100)
