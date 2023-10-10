@@ -257,6 +257,16 @@ def move_circle(radius):
 
 #moveto(100,100)
 new_circle(40)
-sleep(5)
-new_circle(100)
+
+moveto(0, 100) 
+
+new_circle(40) # (40, 100)
+
+moveto(70, 110)  
+moveto(80, 80) 
+moveto(80, -20) 
+moveto(70, -30) 
+
+#sleep(5)
+#new_circle(100)
 #moveto(-100,-100)
