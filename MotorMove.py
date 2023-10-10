@@ -88,7 +88,7 @@ def move_y(steps, time_between):
 
 def moveto(x, y):
 
-    print("Moving from ({actual_x}, {actual_y}) to ({x}, {y})")
+    print(f"Moving from ({actual_x}, {actual_y}) to ({x}, {y})")
 
     sps = motor_speed #* int(Selected)
     c = math.sqrt((actual_x-x)**2 + (actual_y-y)**2)
@@ -127,7 +127,7 @@ def moveto(x, y):
     threadY.join()
     #sleep(time_run_sec)
     #sleep(1)
-    print("Done moving, new pos is ({actual_x}, {actual_y})")
+    print(f"Done moving, new pos is ({actual_x}, {actual_y})")
     # while x_progress < abs(x_offset) or y_progress < abs(y_offset):
 
 
