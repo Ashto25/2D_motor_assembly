@@ -128,7 +128,7 @@ def moveto(x, y):
     threadX.join()
     threadY.join()
     #sleep(time_run_sec)
-    sleep(1)
+    #sleep(1)
     print("Done moving")
     # while x_progress < abs(x_offset) or y_progress < abs(y_offset):
 
@@ -163,7 +163,12 @@ def move_circle(radius):
 
         x_offset = (radius * math.cos(radians))*int(Selected) - current_pos_x
         y_offset = (radius * math.sin(radians))*int(Selected) - current_pos_y
+
+        current_pos_x = x_offset
+        current_pos_y = y_offset
         
+        print(x_offset, y_offset
+
         threadX = threading.Thread(target=move_x, args=(abs(x_offset), time_between))
         threadY = threading.Thread(target=move_y, args=(abs(y_offset), time_between))
 
@@ -172,7 +177,7 @@ def move_circle(radius):
         threadY.start()
         threadX.join()
         threadY.join()
-        sleep(1)
+        #sleep(1)
 
 
     #     GPIO.output(STEP, GPIO.HIGH)
