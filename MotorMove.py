@@ -171,7 +171,7 @@ def new_circle(radius):
     x_center = actual_x
     y_center = actual_y
 
-    for i in range(N):
+    for i in range(N+1):
         angle = i * angle_increment
 
         x_pos = x_center + radius * math.cos(angle) 
