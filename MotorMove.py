@@ -161,8 +161,19 @@ def move_circle(radius):
         #rcosx()
         radians = math.radians(current_degree + (d/int(Selected))) # Calculate next angle to go to
 
-        x_offset = (radius * math.cos(radians))*int(Selected) - current_pos_x
-        y_offset = (radius * math.sin(radians))*int(Selected) - current_pos_y
+        x_offset = (radius * math.cos(radians)) - current_pos_x
+        y_offset = (radius * math.sin(radians)) - current_pos_y
+
+        #Update motor movement direction
+        if x_offset > 0:
+            GPIO.output(DIR, CW)
+        else:
+            GPIO.output(DIR, CCW)
+        
+        if y_offset > 0:
+            GPIO.output(DIR2, CCW)
+        else:
+            GPIO.output(DIR2, CW)
 
         current_pos_x = x_offset
         current_pos_y = y_offset
@@ -200,5 +211,5 @@ def move_circle(radius):
 
 
 moveto(100,100)
-move_circle(50)
+move_circle(5)
 moveto(-100,-100)
